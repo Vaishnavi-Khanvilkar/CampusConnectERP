@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CampusConnect ERP</title>
+
+<link rel="icon" type="image/png"
+href="{{ url_for('static', filename='images/logo.png') }}">
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<!-- AOS Animation -->
+<link rel="stylesheet"
+href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+<!-- Custom CSS -->
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Segoe UI',sans-serif;
+background:#f8f9fa;
+}
+
+/* Navbar */
+
+.navbar{
+
+background:#0d6efd;
+
+}
+
+.navbar-brand{
+
+font-size:28px;
+font-weight:bold;
+
+}
+
+.nav-link{
+
+color:white !important;
+margin-left:15px;
+font-weight:500;
+
+}
+
+.nav-link:hover{
+
+color:#ffc107 !important;
+
+}
+
+/* Hero */
+
+.hero{
+
+background:
+linear-gradient(rgba(13,110,253,.82),rgba(13,110,253,.82)),
+url("{{ url_for('static', filename='images/hero.jpg') }}");
+
+background-size:cover;
+background-position:center;
+
+min-height:90vh;
+
+display:flex;
+align-items:center;
+
+color:white;
+
+}
+
+.hero h1{
+
+font-size:60px;
+font-weight:bold;
+
+}
+
+.hero p{
+
+font-size:22px;
+
+margin-top:20px;
+
+}
+
+.hero img{
+
+border-radius:20px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+}
+
+/* Buttons */
+
+.btn{
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+transform:scale(1.05);
+
+}
+
+.section-title{
+
+font-weight:bold;
+color:#0d6efd;
+margin-bottom:25px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ===========================
+        NAVBAR
+=========================== -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
+    <div class="container">
+
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}"
+                 width="55"
+                 height="55"
+                 class="me-3 rounded-circle">
+
+            <div>
+                <span class="fw-bold fs-4">CampusConnect ERP</span><br>
+                <small class="text-light">Student Activity Management</small>
+            </div>
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto align-items-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/gallery">Gallery</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+
+                <li class="nav-item ms-3">
+                    <a href="/login" class="btn btn-warning px-4 rounded-pill">
+                        Login
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+
+<!-- ===========================
+        HERO SECTION
+=========================== -->
+
+<section class="hero">
+
+<div class="container">
+
+<div class="row align-items-center">
+
+<div class="col-lg-6"
+data-aos="fade-right">
+
+<h1>
+
+CampusConnect ERP
+
+</h1>
+
+<p>
+
+A Smart Student Activity Management System
+
+designed to simplify attendance,
+
+assignments, notices and events
+
+through one secure platform.
+
+</p>
+
+<a href="/login"
+class="btn btn-warning btn-lg mt-3">
+
+<i class="bi bi-box-arrow-in-right"></i>
+
+Login
+
+</a>
+
+<a href="/about"
+class="btn btn-outline-light btn-lg mt-3 ms-2">
+
+Learn More
+
+</a>
+
+</div>
+
+<div class="col-lg-6 text-center"
+data-aos="zoom-in">
+
+<img
+src="{{ url_for('static', filename='images/hero.jpg') }}"
+class="img-fluid"
+style="max-height:450px;">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===========================
+        ABOUT SECTION
+=========================== -->
+
+<section class="container py-5" data-aos="fade-up">
+
+<div class="text-center mb-5">
+
+<h2 class="section-title">
+
+About CampusConnect ERP
+
+</h2>
+
+<p class="text-muted">
+
+A complete Student Activity Management System developed to simplify academic and administrative tasks.
+
+</p>
+
+</div>
+
+<div class="row align-items-center">
+
+<div class="col-lg-6">
+
+<img
+src="{{ url_for('static', filename='images/about.jpg') }}"
+class="img-fluid rounded shadow">
+
+</div>
+
+<div class="col-lg-6">
+
+<h3 class="fw-bold text-primary">
+
+Who We Are
+
+</h3>
+
+<p class="mt-3">
+
+CampusConnect ERP is a web-based application that helps educational institutions manage students, teachers, attendance, assignments, notices and campus events from one centralized platform.
+
+</p>
+
+<p>
+
+The system provides separate dashboards for Administrators, Teachers and Students, making communication faster, easier and more secure.
+
+</p>
+
+<a href="/about" class="btn btn-primary mt-3">
+
+Read More
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        FEATURES
+=========================== -->
+
+<section class="container py-5">
+
+<div class="text-center mb-5">
+
+<h2 class="section-title">
+
+Our Features
+
+</h2>
+
+<p class="text-muted">
+
+Everything you need to manage your campus efficiently.
+
+</p>
+
+</div>
+
+<div class="row g-4">
+
+<div class="col-lg-4 col-md-6" data-aos="zoom-in">
+
+<div class="card h-100 shadow border-0 text-center p-4">
+
+<i class="bi bi-calendar-check-fill text-success"
+style="font-size:60px;"></i>
+
+<h4 class="mt-3">
+
+Attendance
+
+</h4>
+
+<p>
+
+Teachers can record attendance digitally while students can instantly view their attendance records.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+
+<div class="card h-100 shadow border-0 text-center p-4">
+
+<i class="bi bi-file-earmark-text-fill text-primary"
+style="font-size:60px;"></i>
+
+<h4 class="mt-3">
+
+Assignments
+
+</h4>
+
+<p>
+
+Teachers upload assignments with due dates and students can easily download them.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+
+<div class="card h-100 shadow border-0 text-center p-4">
+
+<i class="bi bi-megaphone-fill text-warning"
+style="font-size:60px;"></i>
+
+<h4 class="mt-3">
+
+Notice Board
+
+</h4>
+
+<p>
+
+Publish important announcements and updates for all users in one place.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-4 col-md-6" data-aos="zoom-in">
+
+<div class="card h-100 shadow border-0 text-center p-4">
+
+<i class="bi bi-calendar-event-fill text-danger"
+style="font-size:60px;"></i>
+
+<h4 class="mt-3">
+
+Events
+
+</h4>
+
+<p>
+
+Manage seminars, workshops and college events with complete details.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+
+<div class="card h-100 shadow border-0 text-center p-4">
+
+<i class="bi bi-people-fill text-info"
+style="font-size:60px;"></i>
+
+<h4 class="mt-3">
+
+Student Management
+
+</h4>
+
+<p>
+
+Store and manage student information efficiently through the administrator portal.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+
+<div class="card h-100 shadow border-0 text-center p-4">
+
+<i class="bi bi-person-workspace text-secondary"
+style="font-size:60px;"></i>
+
+<h4 class="mt-3">
+
+Teacher Management
+
+</h4>
+
+<p>
+
+Manage teacher accounts, profiles and responsibilities through the ERP system.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===========================
+        WHY CHOOSE US
+=========================== -->
+
+<section class="container py-5">
+
+<div class="text-center mb-5">
+
+<h2 class="section-title">
+
+Why Choose CampusConnect ERP?
+
+</h2>
+
+<p class="text-muted">
+
+A reliable, secure and modern ERP solution for educational institutions.
+
+</p>
+
+</div>
+
+<div class="row text-center g-4">
+
+<div class="col-md-4" data-aos="fade-up">
+
+<div class="card border-0 shadow p-4 h-100">
+
+<i class="bi bi-shield-check text-success"
+style="font-size:55px;"></i>
+
+<h4 class="mt-3">
+
+Secure System
+
+</h4>
+
+<p>
+
+Role-based login for Administrator, Teacher and Student.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+
+<div class="card border-0 shadow p-4 h-100">
+
+<i class="bi bi-speedometer2 text-primary"
+style="font-size:55px;"></i>
+
+<h4 class="mt-3">
+
+Fast Performance
+
+</h4>
+
+<p>
+
+Quick access to attendance, assignments, notices and events.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+
+<div class="card border-0 shadow p-4 h-100">
+
+<i class="bi bi-phone text-danger"
+style="font-size:55px;"></i>
+
+<h4 class="mt-3">
+
+Responsive Design
+
+</h4>
+
+<p>
+
+Works smoothly on desktop, tablet and mobile devices.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        TECHNOLOGIES
+=========================== -->
+
+<section class="bg-light py-5">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<h2 class="section-title">
+
+Technologies Used
+
+</h2>
+
+</div>
+
+<div class="row text-center">
+
+<div class="col-md-2 col-6 mb-4" data-aos="zoom-in">
+
+<h1>🌐</h1>
+
+<h5>HTML5</h5>
+
+</div>
+
+<div class="col-md-2 col-6 mb-4" data-aos="zoom-in">
+
+<h1>🎨</h1>
+
+<h5>CSS3</h5>
+
+</div>
+
+<div class="col-md-2 col-6 mb-4" data-aos="zoom-in">
+
+<h1>🅱️</h1>
+
+<h5>Bootstrap</h5>
+
+</div>
+
+<div class="col-md-2 col-6 mb-4" data-aos="zoom-in">
+
+<h1>🐍</h1>
+
+<h5>Python</h5>
+
+</div>
+
+<div class="col-md-2 col-6 mb-4" data-aos="zoom-in">
+
+<h1>⚡</h1>
+
+<h5>Flask</h5>
+
+</div>
+
+<div class="col-md-2 col-6 mb-4" data-aos="zoom-in">
+
+<h1>💾</h1>
+
+<h5>SQLite</h5>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        STATISTICS
+=========================== -->
+
+<section class="container py-5">
+
+<div class="row text-center g-4">
+
+<div class="col-md-3" data-aos="flip-left">
+
+<div class="card shadow border-0 p-4">
+
+<h1 class="text-primary">
+
+1000+
+
+</h1>
+
+<h5>
+
+Students
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-md-3" data-aos="flip-left" data-aos-delay="100">
+
+<div class="card shadow border-0 p-4">
+
+<h1 class="text-success">
+
+100+
+
+</h1>
+
+<h5>
+
+Teachers
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-md-3" data-aos="flip-left" data-aos-delay="200">
+
+<div class="card shadow border-0 p-4">
+
+<h1 class="text-warning">
+
+500+
+
+</h1>
+
+<h5>
+
+Assignments
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-md-3" data-aos="flip-left" data-aos-delay="300">
+
+<div class="card shadow border-0 p-4">
+
+<h1 class="text-danger">
+
+150+
+
+</h1>
+
+<h5>
+
+Events
+
+</h5>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        CONTACT
+=========================== -->
+
+<section id="contact" class="bg-primary text-white py-5">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<h2>
+
+Contact Us
+
+</h2>
+
+<p>
+
+We're always happy to help.
+
+</p>
+
+</div>
+
+<div class="row text-center">
+
+<div class="col-md-4">
+
+<i class="bi bi-geo-alt-fill"
+style="font-size:45px;"></i>
+
+<h5 class="mt-3">
+
+Address
+
+</h5>
+
+<p>
+
+Ratnagiri, Maharashtra, India
+
+</p>
+
+</div>
+
+<div class="col-md-4">
+
+<i class="bi bi-envelope-fill"
+style="font-size:45px;"></i>
+
+<h5 class="mt-3">
+
+Email
+
+</h5>
+
+<p>
+
+campusconnect@gmail.com
+
+</p>
+
+</div>
+
+<div class="col-md-4">
+
+<i class="bi bi-telephone-fill"
+style="font-size:45px;"></i>
+
+<h5 class="mt-3">
+
+Phone
+
+</h5>
+
+<p>
+
++91 9876543210
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===========================
+        CALL TO ACTION
+=========================== -->
+
+<section class="py-5 text-center bg-light">
+
+<div class="container">
+
+<h2 class="fw-bold text-primary">
+
+Ready to Experience CampusConnect ERP?
+
+</h2>
+
+<p class="lead text-muted mt-3">
+
+Join us to simplify attendance, assignments, notices and campus management through one smart platform.
+
+</p>
+
+<a href="/login" class="btn btn-primary btn-lg mt-3">
+
+<i class="bi bi-box-arrow-in-right"></i>
+
+Get Started
+
+</a>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        FOOTER
+=========================== -->
+
+<footer class="bg-dark text-white pt-5 pb-3">
+
+<div class="container">
+
+<div class="row">
+
+<!-- About -->
+
+<div class="col-lg-4 mb-4">
+
+<h4>
+
+<i class="bi bi-mortarboard-fill"></i>
+
+CampusConnect ERP
+
+</h4>
+
+<p>
+
+CampusConnect ERP is a modern Student Activity Management System developed to simplify campus administration through technology.
+
+</p>
+
+</div>
+
+<!-- Quick Links -->
+
+<div class="col-lg-4 mb-4">
+
+<h5>
+
+Quick Links
+
+</h5>
+
+<ul class="list-unstyled">
+
+<li class="mb-2">
+
+<a href="/" class="text-white text-decoration-none">
+
+Home
+
+</a>
+
+</li>
+
+<li class="mb-2">
+
+<a href="/about" class="text-white text-decoration-none">
+
+About
+
+</a>
+
+</li>
+
+<li class="mb-2">
+
+<a href="/login" class="text-white text-decoration-none">
+
+Login
+
+</a>
+
+</li>
+
+<li class="mb-2">
+
+<a href="#contact" class="text-white text-decoration-none">
+
+Contact
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- Social -->
+
+<div class="col-lg-4 mb-4">
+
+<h5>
+
+Follow Us
+
+</h5>
+
+<a href="#" class="text-white fs-3 me-3">
+
+<i class="bi bi-facebook"></i>
+
+</a>
+
+<a href="#" class="text-white fs-3 me-3">
+
+<i class="bi bi-instagram"></i>
+
+</a>
+
+<a href="#" class="text-white fs-3 me-3">
+
+<i class="bi bi-linkedin"></i>
+
+</a>
+
+<a href="#" class="text-white fs-3">
+
+<i class="bi bi-github"></i>
+
+</a>
+
+</div>
+
+</div>
+
+<hr class="border-light">
+
+<div class="text-center">
+
+<p class="mb-1">
+
+© 2026 CampusConnect ERP. All Rights Reserved.
+
+</p>
+
+<p class="mb-0">
+
+Developed by <strong>Vaishnavi Khanvilkar</strong>
+
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+<!-- Bootstrap -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- AOS Animation -->
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+
+AOS.init({
+
+duration:1000,
+
+once:true
+
+});
+
+</script>
+
+</body>
+
+</html>

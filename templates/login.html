@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login | CampusConnect ERP</title>
+
+<!-- Bootstrap -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<!-- AOS -->
+
+<link rel="stylesheet"
+href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+<!-- Custom CSS -->
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+body{
+
+font-family:'Segoe UI',sans-serif;
+
+background:#f8f9fa;
+
+}
+
+/* Navbar */
+
+.navbar{
+
+background:#0d6efd;
+
+}
+
+.navbar-brand{
+
+font-size:28px;
+
+font-weight:bold;
+
+}
+
+.nav-link{
+
+color:white !important;
+
+margin-left:15px;
+
+font-weight:500;
+
+}
+
+.nav-link:hover{
+
+color:#ffc107 !important;
+
+}
+
+/* Hero */
+
+.hero{
+
+background:
+linear-gradient(rgba(13,110,253,.85),rgba(13,110,253,.85)),
+url("{{ url_for('static', filename='images/login_bg.png') }}");
+
+background-size:cover;
+
+background-position:center;
+
+min-height:60vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+text-align:center;
+
+color:white;
+
+}
+
+.hero h1{
+
+font-size:55px;
+
+font-weight:bold;
+
+}
+
+.hero p{
+
+font-size:22px;
+
+margin-top:20px;
+
+}
+
+.section-title{
+
+color:#0d6efd;
+
+font-weight:bold;
+
+}
+
+.role-card{
+
+border:none;
+
+border-radius:20px;
+
+transition:.4s;
+
+cursor:pointer;
+
+}
+
+.role-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+.role-icon{
+
+font-size:70px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ===========================
+        NAVBAR
+=========================== -->
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow">
+
+<div class="container">
+
+<a class="navbar-brand" href="/">
+
+<i class="bi bi-mortarboard-fill"></i>
+
+CampusConnect ERP
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarMenu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse"
+id="navbarMenu">
+
+<ul class="navbar-nav ms-auto">
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/gallery">Gallery</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+
+                <li class="nav-item ms-3">
+                    <a href="/login" class="btn btn-warning px-4 rounded-pill">
+                        Login
+                    </a>
+                </li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- ===========================
+        HERO SECTION
+=========================== -->
+
+<section class="hero">
+
+<div class="container" data-aos="zoom-in">
+
+<h1>
+
+Welcome to CampusConnect ERP
+
+</h1>
+
+<p>
+
+Choose your role below to securely access your dashboard.
+
+</p>
+
+</div>
+
+</section>
+<!-- ===========================
+        LOGIN SELECTION
+=========================== -->
+
+<section class="container py-5">
+
+<div class="text-center mb-5">
+
+<h2 class="section-title">
+
+Select Your Role
+
+</h2>
+
+<p class="text-muted">
+
+Choose your role to continue to the respective login page.
+
+</p>
+
+</div>
+
+<div class="row justify-content-center g-4">
+
+<!-- Student -->
+
+<div class="col-lg-4 col-md-6" data-aos="fade-up">
+
+<div class="card role-card shadow-lg text-center p-4 h-100">
+
+<i class="bi bi-mortarboard-fill role-icon text-primary"></i>
+
+<h3 class="mt-3">
+
+Student
+
+</h3>
+
+<p>
+
+Access attendance, assignments, notices, events and your academic information.
+
+</p>
+
+<a href="/student"
+class="btn btn-primary btn-lg mt-3">
+
+<i class="bi bi-box-arrow-in-right"></i>
+
+Student Login
+
+</a>
+
+</div>
+
+</div>
+
+<!-- Teacher -->
+
+<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+
+<div class="card role-card shadow-lg text-center p-4 h-100">
+
+<i class="bi bi-person-workspace role-icon text-success"></i>
+
+<h3 class="mt-3">
+
+Teacher
+
+</h3>
+
+<p>
+
+Manage attendance, upload assignments, post notices and view campus events.
+
+</p>
+
+<a href="/teacher"
+class="btn btn-success btn-lg mt-3">
+
+<i class="bi bi-box-arrow-in-right"></i>
+
+Teacher Login
+
+</a>
+
+</div>
+
+</div>
+
+<!-- Administrator -->
+
+<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+
+<div class="card role-card shadow-lg text-center p-4 h-100">
+
+<i class="bi bi-shield-lock-fill role-icon text-danger"></i>
+
+<h3 class="mt-3">
+
+Administrator
+
+</h3>
+
+<p>
+
+Manage students, teachers, notices, assignments, events and the entire ERP system.
+
+</p>
+
+<a href="/admin"
+class="btn btn-danger btn-lg mt-3">
+
+<i class="bi bi-box-arrow-in-right"></i>
+
+Admin Login
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        LOGIN HELP
+=========================== -->
+
+<section class="container pb-5">
+
+<div class="alert alert-info shadow-sm text-center" data-aos="fade-up">
+
+<h5>
+
+<i class="bi bi-info-circle-fill"></i>
+
+Need Help?
+
+</h5>
+
+<p class="mb-0">
+
+If you are unable to log in, please contact your institution's administrator for assistance.
+
+</p>
+
+</div>
+
+</section>
+<!-- ===========================
+        WHY CAMPUSCONNECT ERP
+=========================== -->
+
+<section class="py-5 bg-light">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<h2 class="section-title">
+
+Why Choose CampusConnect ERP?
+
+</h2>
+
+<p class="text-muted">
+
+Designed to make campus management smarter, faster and more secure.
+
+</p>
+
+</div>
+
+<div class="row g-4">
+
+<div class="col-md-4" data-aos="zoom-in">
+
+<div class="card border-0 shadow text-center p-4 h-100">
+
+<i class="bi bi-lightning-charge-fill text-warning"
+style="font-size:60px;"></i>
+
+<h4 class="mt-3">
+
+Fast & Efficient
+
+</h4>
+
+<p>
+
+Quickly access attendance, assignments, notices and events from a single platform.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+
+<div class="card border-0 shadow text-center p-4 h-100">
+
+<i class="bi bi-shield-lock-fill text-success"
+style="font-size:60px;"></i>
+
+<h4 class="mt-3">
+
+Secure Login
+
+</h4>
+
+<p>
+
+Separate secure login portals for Students, Teachers and Administrators.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+
+<div class="card border-0 shadow text-center p-4 h-100">
+
+<i class="bi bi-phone-fill text-primary"
+style="font-size:60px;"></i>
+
+<h4 class="mt-3">
+
+Responsive Design
+
+</h4>
+
+<p>
+
+Works smoothly on desktops, laptops, tablets and mobile devices.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        PLATFORM HIGHLIGHTS
+=========================== -->
+
+<section class="py-5">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<h2 class="section-title">
+
+Platform Highlights
+
+</h2>
+
+</div>
+
+<div class="row text-center">
+
+<div class="col-md-3 mb-4" data-aos="flip-left">
+
+<div class="card border-0 shadow p-4">
+
+<h1 class="text-primary">
+
+24×7
+
+</h1>
+
+<h5>
+
+Availability
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-md-3 mb-4" data-aos="flip-left" data-aos-delay="100">
+
+<div class="card border-0 shadow p-4">
+
+<h1 class="text-success">
+
+100%
+
+</h1>
+
+<h5>
+
+Secure Access
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-md-3 mb-4" data-aos="flip-left" data-aos-delay="200">
+
+<div class="card border-0 shadow p-4">
+
+<h1 class="text-warning">
+
+3
+
+</h1>
+
+<h5>
+
+User Roles
+
+</h5>
+
+</div>
+
+</div>
+
+<div class="col-md-3 mb-4" data-aos="flip-left" data-aos-delay="300">
+
+<div class="card border-0 shadow p-4">
+
+<h1 class="text-danger">
+
+6+
+
+</h1>
+
+<h5>
+
+Major Modules
+
+</h5>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        MODULES
+=========================== -->
+
+<section class="py-5 bg-primary text-white">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<h2>
+
+Modules Available
+
+</h2>
+
+</div>
+
+<div class="row text-center">
+
+<div class="col-md-2 col-6 mb-4">
+
+<i class="bi bi-calendar-check-fill"
+style="font-size:50px;"></i>
+
+<h6 class="mt-2">
+
+Attendance
+
+</h6>
+
+</div>
+
+<div class="col-md-2 col-6 mb-4">
+
+<i class="bi bi-file-earmark-text-fill"
+style="font-size:50px;"></i>
+
+<h6 class="mt-2">
+
+Assignments
+
+</h6>
+
+</div>
+
+<div class="col-md-2 col-6 mb-4">
+
+<i class="bi bi-megaphone-fill"
+style="font-size:50px;"></i>
+
+<h6 class="mt-2">
+
+Notices
+
+</h6>
+
+</div>
+
+<div class="col-md-2 col-6 mb-4">
+
+<i class="bi bi-calendar-event-fill"
+style="font-size:50px;"></i>
+
+<h6 class="mt-2">
+
+Events
+
+</h6>
+
+</div>
+
+<div class="col-md-2 col-6 mb-4">
+
+<i class="bi bi-people-fill"
+style="font-size:50px;"></i>
+
+<h6 class="mt-2">
+
+Students
+
+</h6>
+
+</div>
+
+<div class="col-md-2 col-6 mb-4">
+
+<i class="bi bi-person-workspace"
+style="font-size:50px;"></i>
+
+<h6 class="mt-2">
+
+Teachers
+
+</h6>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===========================
+        CONTACT SECTION
+=========================== -->
+
+<section class="py-5 bg-light">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<h2 class="section-title">
+
+Contact Us
+
+</h2>
+
+<p class="text-muted">
+
+Need assistance? We're here to help.
+
+</p>
+
+</div>
+
+<div class="row text-center">
+
+<div class="col-md-4 mb-4">
+
+<i class="bi bi-geo-alt-fill text-danger"
+style="font-size:55px;"></i>
+
+<h4 class="mt-3">
+
+Address
+
+</h4>
+
+<p>
+
+Ratnagiri, Maharashtra, India
+
+</p>
+
+</div>
+
+<div class="col-md-4 mb-4">
+
+<i class="bi bi-envelope-fill text-primary"
+style="font-size:55px;"></i>
+
+<h4 class="mt-3">
+
+Email
+
+</h4>
+
+<p>
+
+campusconnecterp@gmail.com
+
+</p>
+
+</div>
+
+<div class="col-md-4 mb-4">
+
+<i class="bi bi-telephone-fill text-success"
+style="font-size:55px;"></i>
+
+<h4 class="mt-3">
+
+Phone
+
+</h4>
+
+<p>
+
++91 9876543210
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        FOOTER
+=========================== -->
+
+<footer class="bg-dark text-white pt-5 pb-3">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-4 mb-4">
+
+<h4>
+
+<i class="bi bi-mortarboard-fill"></i>
+
+CampusConnect ERP
+
+</h4>
+
+<p>
+
+A secure and modern Student Activity Management System designed to simplify academic administration.
+
+</p>
+
+</div>
+
+<div class="col-lg-4 mb-4">
+
+<h5>
+
+Quick Links
+
+</h5>
+
+<ul class="list-unstyled">
+
+<li>
+
+<a href="/"
+class="text-white text-decoration-none">
+
+Home
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/about"
+class="text-white text-decoration-none">
+
+About
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/login"
+class="text-white text-decoration-none">
+
+Login
+
+</a>
+
+</li>
+
+<li>
+
+<a href="/#contact"
+class="text-white text-decoration-none">
+
+Contact
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="col-lg-4 mb-4">
+
+<h5>
+
+Follow Us
+
+</h5>
+
+<a href="#" class="text-white fs-3 me-3">
+
+<i class="bi bi-facebook"></i>
+
+</a>
+
+<a href="#" class="text-white fs-3 me-3">
+
+<i class="bi bi-instagram"></i>
+
+</a>
+
+<a href="#" class="text-white fs-3 me-3">
+
+<i class="bi bi-linkedin"></i>
+
+</a>
+
+<a href="#" class="text-white fs-3">
+
+<i class="bi bi-github"></i>
+
+</a>
+
+</div>
+
+</div>
+
+<hr class="border-light">
+
+<div class="text-center">
+
+<p class="mb-1">
+
+© 2026 CampusConnect ERP. All Rights Reserved.
+
+</p>
+
+<p>
+
+Developed by <strong>Vaishnavi Khanvilkar</strong>
+
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- AOS Animation -->
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+
+AOS.init({
+
+duration:1000,
+
+once:true
+
+});
+
+</script>
+
+</body>
+
+</html>

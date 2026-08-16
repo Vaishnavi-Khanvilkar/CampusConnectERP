@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Events | CampusConnect ERP</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CampusConnect CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- =====================================================
+                        NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <h4>
+        <i class="bi bi-mortarboard-fill"></i>
+        CampusConnect ERP
+    </h4>
+
+    <span>
+        <i class="bi bi-person-circle"></i>
+        {{ student.name }}
+    </span>
+
+</nav>
+
+
+<!-- =====================================================
+                        SIDEBAR
+===================================================== -->
+
+<div class="sidebar">
+
+    <div class="sidebar-brand">
+        <i class="bi bi-grid-fill"></i>
+        <span>MENU</span>
+    </div>
+
+    <div class="sidebar-subtitle">
+        Student Portal
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+
+    <!-- Dashboard -->
+    <a href="/student_dashboard"
+       class="menu-link">
+
+        <i class="bi bi-speedometer2"></i>
+        <span>Dashboard</span>
+
+    </a>
+
+
+    <!-- Attendance -->
+    <a href="/attendance"
+       class="menu-link">
+
+        <i class="bi bi-calendar-check-fill"></i>
+        <span>Attendance</span>
+
+    </a>
+
+
+    <!-- Assignments -->
+    <a href="/assignments"
+       class="menu-link">
+
+        <i class="bi bi-file-earmark-text"></i>
+        <span>Assignments</span>
+
+    </a>
+
+
+    <!-- Notices -->
+    <a href="/notices"
+       class="menu-link">
+
+        <i class="bi bi-megaphone-fill"></i>
+        <span>Notices</span>
+
+    </a>
+
+
+    <!-- Events -->
+    <a href="/events"
+       class="menu-link active">
+
+        <i class="bi bi-calendar-event-fill"></i>
+        <span>Events</span>
+
+    </a>
+
+
+    <!-- Profile -->
+    <a href="/student_profile"
+       class="menu-link">
+
+        <i class="bi bi-person-circle"></i>
+        <span>My Profile</span>
+
+    </a>
+
+
+    <!-- Change Password -->
+    <a href="/change_password"
+       class="menu-link">
+
+        <i class="bi bi-key-fill"></i>
+        <span>Change Password</span>
+
+    </a>
+
+
+    <!-- Logout -->
+    <a href="/student_logout"
+       class="btn btn-danger logout-btn">
+
+        <i class="bi bi-box-arrow-right"></i>
+        Logout
+
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+                      MAIN CONTENT
+===================================================== -->
+
+<div class="dashboard-content">
+
+    <div class="content-wrapper">
+
+
+        <!-- =================================================
+                        WELCOME BOX
+        ================================================= -->
+
+        <div class="welcome-box">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-8">
+
+                    <h2>
+                        <i class="bi bi-calendar-event-fill"></i>
+                        Upcoming Events
+                    </h2>
+
+                    <p>
+                        Participate in technical, cultural and sports
+                        activities to enhance your learning and campus
+                        experience.
+                    </p>
+
+                </div>
+
+
+                <div class="col-lg-4 text-end">
+
+                    <i class="bi bi-calendar-event-fill welcome-icon"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+                        SUMMARY CARD
+        ================================================= -->
+
+        <div class="dashboard-card mb-4">
+
+            <div class="card-icon">
+
+                <i class="bi bi-calendar-event-fill"></i>
+
+            </div>
+
+            <h5>
+                Total Events
+            </h5>
+
+            <h2>
+                {{ events|length }}
+            </h2>
+
+            <small class="text-muted">
+                Upcoming College Events
+            </small>
+
+        </div>
+
+
+        <!-- =================================================
+                        EVENTS SECTION
+        ================================================= -->
+
+        <div class="dashboard-box">
+
+            <h4>
+
+                <i class="bi bi-calendar-event-fill"></i>
+
+                Upcoming College Events
+
+            </h4>
+
+
+            {% if events %}
+
+            <div class="row g-4">
+
+                {% for e in events %}
+
+                <div class="col-lg-6">
+
+                    <div class="event-card h-100">
+
+                        <div class="card-body">
+
+                            <!-- Event Header -->
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                                <h5 class="text-primary mb-0">
+
+                                    <i class="bi bi-calendar-event-fill"></i>
+
+                                    {{ e.event_name }}
+
+                                </h5>
+
+                                <span class="badge bg-success">
+                                    Upcoming
+                                </span>
+
+                            </div>
+
+
+                            <hr>
+
+
+                            <!-- Event Date -->
+
+                            <p>
+
+                                <i class="bi bi-calendar3 text-primary"></i>
+
+                                <strong>Date:</strong>
+
+                                {{ e.event_date }}
+
+                            </p>
+
+
+                            <!-- Event Venue -->
+
+                            <p>
+
+                                <i class="bi bi-geo-alt-fill text-danger"></i>
+
+                                <strong>Venue:</strong>
+
+                                {{ e.venue }}
+
+                            </p>
+
+
+                            <!-- Event Description -->
+
+                            {% if e.description %}
+
+                            <p class="text-muted">
+
+                                <i class="bi bi-info-circle"></i>
+
+                                {{ e.description }}
+
+                            </p>
+
+                            {% else %}
+
+                            <p class="text-muted">
+
+                                No description available.
+
+                            </p>
+
+                            {% endif %}
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            {% else %}
+
+            <!-- Empty State -->
+
+            <div class="empty-state">
+
+                <i class="bi bi-calendar-x"></i>
+
+                <h4>
+                    No Upcoming Events
+                </h4>
+
+                <p>
+                    There are no upcoming college events at the moment.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- =================================================
+                        QUICK ACTIONS
+        ================================================= -->
+
+        <div class="dashboard-box mt-4">
+
+            <h4>
+
+                <i class="bi bi-lightning-charge-fill"></i>
+
+                Quick Actions
+
+            </h4>
+
+
+            <div class="row g-3">
+
+
+                <!-- Dashboard -->
+
+                <div class="col-md-6">
+
+                    <a href="/student_dashboard"
+                       class="btn btn-primary w-100 py-3">
+
+                        <i class="bi bi-house-door-fill"></i>
+
+                        <br>
+
+                        Back to Dashboard
+
+                    </a>
+
+                </div>
+
+
+                <!-- Notices -->
+
+                <div class="col-md-6">
+
+                    <a href="/notices"
+                       class="btn btn-warning w-100 py-3">
+
+                        <i class="bi bi-megaphone-fill"></i>
+
+                        <br>
+
+                        View Notices
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+                            FOOTER
+        ================================================= -->
+
+        <footer>
+
+            <hr>
+
+            <p>
+                © 2026 CampusConnect ERP |
+                Student Events
+            </p>
+
+        </footer>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+                    BOOTSTRAP JS
+===================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- =====================================================
+                    ACTIVE MENU
+===================================================== -->
+
+<script>
+
+    const currentPath = window.location.pathname;
+
+    document.querySelectorAll(".menu-link").forEach(link => {
+
+        if (link.getAttribute("href") === currentPath) {
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>

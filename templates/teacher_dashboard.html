@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Dashboard | CampusConnect ERP</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div class="sidebar">
+
+    <!-- Logo -->
+
+    <div class="sidebar-logo">
+
+        <div class="logo-icon">
+
+            <i class="bi bi-mortarboard-fill"></i>
+
+        </div>
+
+        <div>
+
+            <h4>CampusConnect</h4>
+
+            <small>TEACHER PORTAL</small>
+
+        </div>
+
+    </div>
+
+
+    <hr>
+
+
+    <!-- Menu title -->
+
+    <div class="sidebar-title">
+
+        MAIN MENU
+
+    </div>
+
+
+    <!-- Dashboard -->
+
+    <a href="{{ url_for('teacher_dashboard') }}"
+       class="menu-link active">
+
+        <i class="bi bi-speedometer2"></i>
+
+        <span>Dashboard</span>
+
+    </a>
+
+
+    <!-- Add Attendance -->
+
+    <a href="{{ url_for('add_attendance') }}"
+       class="menu-link">
+
+        <i class="bi bi-calendar-check"></i>
+
+        <span>Add Attendance</span>
+
+    </a>
+
+
+    <!-- Upload Assignment -->
+
+    <a href="{{ url_for('upload_assignment') }}"
+       class="menu-link">
+
+        <i class="bi bi-cloud-arrow-up"></i>
+
+        <span>Upload Assignment</span>
+
+    </a>
+
+
+    <!-- View Assignments -->
+
+    <a href="{{ url_for('teacher_assignments') }}"
+       class="menu-link">
+
+        <i class="bi bi-file-earmark-text"></i>
+
+        <span>View Assignments</span>
+
+    </a>
+
+
+    <!-- Post Notice -->
+
+    <a href="{{ url_for('post_notice') }}"
+       class="menu-link">
+
+        <i class="bi bi-megaphone"></i>
+
+        <span>Post Notice</span>
+
+    </a>
+
+
+    <!-- View Notices -->
+
+    <a href="{{ url_for('teacher_notices') }}"
+       class="menu-link">
+
+        <i class="bi bi-bell"></i>
+
+        <span>View Notices</span>
+
+    </a>
+
+
+    <!-- Events -->
+
+    <a href="{{ url_for('teacher_events') }}"
+       class="menu-link">
+
+        <i class="bi bi-calendar-event"></i>
+
+        <span>Events</span>
+
+    </a>
+
+
+    <!-- Profile -->
+
+    <a href="{{ url_for('teacher_profile') }}"
+       class="menu-link">
+
+        <i class="bi bi-person-circle"></i>
+
+        <span>My Profile</span>
+
+    </a>
+
+
+    <!-- Change Password -->
+
+    <a href="{{ url_for('teacher_change_password') }}"
+       class="menu-link">
+
+        <i class="bi bi-key"></i>
+
+        <span>Change Password</span>
+
+    </a>
+
+
+    <!-- Sidebar bottom -->
+
+    <div class="sidebar-bottom">
+
+        <div class="sidebar-user">
+
+            <div class="sidebar-user-icon">
+
+                <i class="bi bi-person-workspace"></i>
+
+            </div>
+
+            <div>
+
+                <strong>{{ teacher.name }}</strong>
+
+                <small>Teacher</small>
+
+            </div>
+
+        </div>
+
+
+        <!-- Logout -->
+
+        <a href="{{ url_for('teacher_logout') }}"
+           class="logout-link">
+
+            <i class="bi bi-box-arrow-right"></i>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</div>
+<!-- =====================================================
+     MAIN WRAPPER
+===================================================== -->
+
+<div class="main-wrapper">
+
+
+    <!-- =================================================
+         TOP NAVBAR
+    ================================================== -->
+
+    <nav class="top-navbar">
+
+
+        <!-- Mobile Menu Button -->
+
+        <button class="sidebar-toggle"
+                id="sidebarToggle"
+                type="button">
+
+            <i class="bi bi-list"></i>
+
+        </button>
+
+
+        <!-- Page Information -->
+
+        <div class="navbar-page">
+
+            <h5>Teacher Dashboard</h5>
+
+            <small>
+                CampusConnect ERP
+            </small>
+
+        </div>
+
+
+        <!-- Navbar Right -->
+
+        <div class="navbar-right">
+
+
+            <!-- Notification -->
+
+            <button class="notification-btn"
+                    type="button">
+
+                <i class="bi bi-bell"></i>
+
+                {% if notices %}
+
+                    <span class="notification-badge">
+
+                        {{ notices|length }}
+
+                    </span>
+
+                {% endif %}
+
+            </button>
+
+
+            <!-- Teacher Profile -->
+
+            <div class="profile-dropdown">
+
+                <div class="profile-avatar">
+
+                    <i class="bi bi-person-workspace"></i>
+
+                </div>
+
+
+                <div class="profile-info">
+
+                    <strong>
+
+                        {{ teacher.name }}
+
+                    </strong>
+
+                    <small>
+
+                        Teacher
+
+                    </small>
+
+                </div>
+
+
+                <i class="bi bi-chevron-down"></i>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =================================================
+         DASHBOARD CONTENT
+    ================================================== -->
+
+    <main class="dashboard-content">
+
+        <div class="content-wrapper">
+
+
+            <!-- =================================================
+                 WELCOME SECTION
+            ================================================== -->
+
+            <section class="welcome-box">
+
+                <div class="row align-items-center">
+
+
+                    <!-- Welcome Text -->
+
+                    <div class="col-lg-8">
+
+
+                        <div class="welcome-label">
+
+                            <i class="bi bi-person-workspace"></i>
+
+                            TEACHER PORTAL
+
+                        </div>
+
+
+                        <h1>
+
+                            Welcome,
+
+                            <span>{{ teacher.name }}</span>
+
+                            👋
+
+                        </h1>
+
+
+                        <p>
+
+                            Manage attendance, assignments,
+                            notices and campus events from
+                            your professional teacher dashboard.
+
+                        </p>
+
+
+                        <!-- Welcome Buttons -->
+
+                        <div class="welcome-actions">
+
+
+                            <a href="{{ url_for('add_attendance') }}"
+                               class="btn btn-light">
+
+                                <i class="bi bi-calendar-check me-1"></i>
+
+                                Add Attendance
+
+                            </a>
+
+
+                            <a href="{{ url_for('upload_assignment') }}"
+                               class="btn btn-outline-light">
+
+                                <i class="bi bi-cloud-arrow-up me-1"></i>
+
+                                Upload Assignment
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Welcome Icon -->
+
+                    <div class="col-lg-4 text-center">
+
+                        <div class="welcome-icon">
+
+                            <i class="bi bi-person-workspace"></i>
+
+                        </div>
+
+                        <p class="welcome-icon-text">
+
+                            Manage your academic activities
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+            <!-- =================================================
+                 STATISTICS
+            ================================================== -->
+
+            <section class="statistics-section">
+
+
+                <!-- Section Heading -->
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h3>
+
+                            Dashboard Overview
+
+                        </h3>
+
+                        <p>
+
+                            Quick summary of your academic activities
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Statistics Cards -->
+
+                <div class="row g-4">
+
+
+                    <!-- Total Students -->
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+
+                        <div class="stat-card attendance-card">
+
+                            <div class="stat-card-top">
+
+                                <div class="stat-icon">
+
+                                    <i class="bi bi-people-fill"></i>
+
+                                </div>
+
+                                <span class="stat-badge">
+
+                                    Students
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="stat-info">
+
+                                <h6>
+
+                                    Total Students
+
+                                </h6>
+
+                                <h2>
+
+                                    {{ students }}
+
+                                </h2>
+
+                                <p>
+
+                                    Students registered in the system
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Assignments -->
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+
+                        <div class="stat-card assignment-card">
+
+                            <div class="stat-card-top">
+
+                                <div class="stat-icon">
+
+                                    <i class="bi bi-file-earmark-arrow-up-fill"></i>
+
+                                </div>
+
+                                <span class="stat-badge">
+
+                                    Assignments
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="stat-info">
+
+                                <h6>
+
+                                    Total Assignments
+
+                                </h6>
+
+                                <h2>
+
+                                    {{ assignments }}
+
+                                </h2>
+
+                                <p>
+
+                                    Assignments available
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Notices -->
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+
+                        <div class="stat-card notice-card">
+
+                            <div class="stat-card-top">
+
+                                <div class="stat-icon">
+
+                                    <i class="bi bi-megaphone-fill"></i>
+
+                                </div>
+
+                                <span class="stat-badge">
+
+                                    Notices
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="stat-info">
+
+                                <h6>
+
+                                    Total Notices
+
+                                </h6>
+
+                                <h2>
+
+                                    {{ notices|length }}
+
+                                </h2>
+
+                                <p>
+
+                                    Published announcements
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Events -->
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+
+                        <div class="stat-card event-card">
+
+                            <div class="stat-card-top">
+
+                                <div class="stat-icon">
+
+                                    <i class="bi bi-calendar-event-fill"></i>
+
+                                </div>
+
+                                <span class="stat-badge">
+
+                                    Events
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="stat-info">
+
+                                <h6>
+
+                                    Total Events
+
+                                </h6>
+
+                                <h2>
+
+                                    {{ events|length }}
+
+                                </h2>
+
+                                <p>
+
+                                    Campus events available
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 QUICK ACTIONS
+            ================================================== -->
+
+            <section class="quick-actions-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h3>
+
+                            Quick Actions
+
+                        </h3>
+
+                        <p>
+
+                            Frequently used teacher functions
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row g-4">
+
+
+                    <!-- Add Attendance -->
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+
+                        <a href="{{ url_for('add_attendance') }}"
+                           class="quick-action-card">
+
+
+                            <div class="quick-action-icon attendance-icon">
+
+                                <i class="bi bi-calendar-check-fill"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h5>
+
+                                    Add Attendance
+
+                                </h5>
+
+                                <p>
+
+                                    Record daily attendance
+                                    for students.
+
+                                </p>
+
+                            </div>
+
+
+                            <i class="bi bi-arrow-up-right action-arrow"></i>
+
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- Upload Assignment -->
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+
+                        <a href="{{ url_for('upload_assignment') }}"
+                           class="quick-action-card">
+
+
+                            <div class="quick-action-icon assignment-icon">
+
+                                <i class="bi bi-cloud-arrow-up-fill"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h5>
+
+                                    Upload Assignment
+
+                                </h5>
+
+                                <p>
+
+                                    Share assignments with
+                                    your students.
+
+                                </p>
+
+                            </div>
+
+
+                            <i class="bi bi-arrow-up-right action-arrow"></i>
+
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- Post Notice -->
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+
+                        <a href="{{ url_for('post_notice') }}"
+                           class="quick-action-card">
+
+
+                            <div class="quick-action-icon notice-icon">
+
+                                <i class="bi bi-megaphone-fill"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h5>
+
+                                    Post Notice
+
+                                </h5>
+
+                                <p>
+
+                                    Publish important
+                                    announcements.
+
+                                </p>
+
+                            </div>
+
+
+                            <i class="bi bi-arrow-up-right action-arrow"></i>
+
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- Events -->
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+
+                        <a href="{{ url_for('teacher_events') }}"
+                           class="quick-action-card">
+
+
+                            <div class="quick-action-icon event-icon">
+
+                                <i class="bi bi-calendar-event-fill"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h5>
+
+                                    Events
+
+                                </h5>
+
+                                <p>
+
+                                    View upcoming campus events.
+
+                                </p>
+
+                            </div>
+
+
+                            <i class="bi bi-arrow-up-right action-arrow"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+            <!-- =================================================
+                 RECENT ACTIVITY
+            ================================================== -->
+
+            <section class="activity-section">
+
+                <div class="row g-4">
+
+
+                    <!-- =================================================
+                         RECENT NOTICES
+                    ================================================== -->
+
+                    <div class="col-lg-6">
+
+                        <div class="activity-card">
+
+
+                            <!-- Header -->
+
+                            <div class="activity-header">
+
+                                <div>
+
+                                    <h5>
+
+                                        <i class="bi bi-megaphone-fill"></i>
+
+                                        Recent Notices
+
+                                    </h5>
+
+                                    <p>
+
+                                        Latest announcements
+
+                                    </p>
+
+                                </div>
+
+
+                                <a href="{{ url_for('teacher_notices') }}"
+                                   class="view-all-btn">
+
+                                    View All
+
+                                    <i class="bi bi-arrow-right"></i>
+
+                                </a>
+
+                            </div>
+
+
+                            <!-- Notices -->
+
+                            {% if notices %}
+
+                                {% for notice in notices[:5] %}
+
+                                <div class="notice-list-item">
+
+
+                                    <div class="notice-icon">
+
+                                        <i class="bi bi-megaphone-fill"></i>
+
+                                    </div>
+
+
+                                    <div class="notice-content">
+
+                                        <h6>
+
+                                            {{ notice.title }}
+
+                                        </h6>
+
+
+                                        <p>
+
+                                            {{ notice.description }}
+
+                                        </p>
+
+
+                                        <small>
+
+                                            <i class="bi bi-info-circle"></i>
+
+                                            College Notice
+
+                                        </small>
+
+                                    </div>
+
+
+                                    <i class="bi bi-chevron-right notice-arrow"></i>
+
+                                </div>
+
+                                {% endfor %}
+
+
+                            {% else %}
+
+
+                                <div class="empty-state">
+
+                                    <i class="bi bi-bell-slash"></i>
+
+                                    <h6>
+
+                                        No Notices Available
+
+                                    </h6>
+
+                                    <p>
+
+                                        There are no notices to display.
+
+                                    </p>
+
+                                </div>
+
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         UPCOMING EVENTS
+                    ================================================== -->
+
+                    <div class="col-lg-6">
+
+                        <div class="activity-card">
+
+
+                            <!-- Header -->
+
+                            <div class="activity-header">
+
+                                <div>
+
+                                    <h5>
+
+                                        <i class="bi bi-calendar-event-fill"></i>
+
+                                        Upcoming Events
+
+                                    </h5>
+
+                                    <p>
+
+                                        Latest campus events
+
+                                    </p>
+
+                                </div>
+
+
+                                <a href="{{ url_for('teacher_events') }}"
+                                   class="view-all-btn">
+
+                                    View All
+
+                                    <i class="bi bi-arrow-right"></i>
+
+                                </a>
+
+                            </div>
+
+
+                            <!-- Events -->
+
+                            {% if events %}
+
+                                {% for event in events[:5] %}
+
+                                <div class="event-list-item">
+
+
+                                    <div class="event-date">
+
+                                        <strong>
+
+                                            {{ event.event_date }}
+
+                                        </strong>
+
+                                        <small>
+
+                                            EVENT
+
+                                        </small>
+
+                                    </div>
+
+
+                                    <div class="event-content">
+
+                                        <h6>
+
+                                            {{ event.event_name }}
+
+                                        </h6>
+
+
+                                        <p>
+
+                                            <i class="bi bi-geo-alt-fill"></i>
+
+                                            {{ event.venue }}
+
+                                        </p>
+
+
+                                        <small>
+
+                                            {{ event.description }}
+
+                                        </small>
+
+                                    </div>
+
+
+                                    <i class="bi bi-chevron-right event-arrow"></i>
+
+                                </div>
+
+                                {% endfor %}
+
+
+                            {% else %}
+
+
+                                <div class="empty-state">
+
+                                    <i class="bi bi-calendar-x"></i>
+
+                                    <h6>
+
+                                        No Upcoming Events
+
+                                    </h6>
+
+                                    <p>
+
+                                        There are no upcoming events.
+
+                                    </p>
+
+                                </div>
+
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer class="dashboard-footer">
+
+
+                <div class="footer-content">
+
+
+                    <!-- Footer Brand -->
+
+                    <div class="footer-brand">
+
+                        <div class="footer-logo">
+
+                            <i class="bi bi-mortarboard-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h5>
+
+                                CampusConnect ERP
+
+                            </h5>
+
+                            <p>
+
+                                Student Activity Management Portal
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Footer Information -->
+
+                    <div class="footer-info">
+
+                        <span>
+
+                            <i class="bi bi-person-workspace"></i>
+
+                            Teacher Portal
+
+                        </span>
+
+
+                        <span>
+
+                            <i class="bi bi-shield-check"></i>
+
+                            Secure System
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <hr>
+
+
+                <div class="footer-bottom">
+
+                    <p>
+
+                        © 2026 CampusConnect ERP.
+                        All rights reserved.
+
+                    </p>
+
+
+                    <p>
+
+                        Teacher Dashboard
+
+                    </p>
+
+                </div>
+
+            </footer>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     BOOTSTRAP JS
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+
+<!-- =====================================================
+     MOBILE SIDEBAR
+===================================================== -->
+
+<script>
+
+const sidebar = document.querySelector(".sidebar");
+
+const sidebarToggle =
+    document.getElementById("sidebarToggle");
+
+
+if (sidebarToggle) {
+
+    sidebarToggle.addEventListener("click", function () {
+
+        sidebar.classList.toggle("sidebar-open");
+
+    });
+
+}
+
+
+/* Close sidebar after selecting a menu item */
+
+document.querySelectorAll(".menu-link").forEach(function(link) {
+
+    link.addEventListener("click", function() {
+
+        if (window.innerWidth <= 991) {
+
+            sidebar.classList.remove("sidebar-open");
+
+        }
+
+    });
+
+});
+
+</script>
+
+
+</body>
+
+</html>

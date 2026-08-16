@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>View Notices | CampusConnect ERP</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- ===========================
+        NAVBAR
+=========================== -->
+
+<nav class="navbar">
+
+<h4>
+
+<i class="bi bi-mortarboard-fill"></i>
+
+CampusConnect ERP
+
+</h4>
+
+<span>
+
+<i class="bi bi-shield-lock-fill"></i>
+
+Administrator
+
+</span>
+
+</nav>
+
+<!-- ===========================
+        SIDEBAR
+=========================== -->
+
+<div class="sidebar">
+
+<h3>
+
+<i class="bi bi-grid-fill"></i>
+
+ADMIN
+
+</h3>
+
+<hr>
+
+<a href="/admin_dashboard" class="menu-link">
+
+<i class="bi bi-speedometer2"></i>
+
+Dashboard
+
+</a>
+
+<a href="/add_student" class="menu-link">
+
+<i class="bi bi-person-plus-fill"></i>
+
+Add Student
+
+</a>
+
+<a href="/view_students" class="menu-link">
+
+<i class="bi bi-people-fill"></i>
+
+View Students
+
+</a>
+
+<a href="/add_teacher" class="menu-link">
+
+<i class="bi bi-person-workspace"></i>
+
+Add Teacher
+
+</a>
+
+<a href="/view_teacher" class="menu-link">
+
+<i class="bi bi-person-lines-fill"></i>
+
+View Teachers
+
+</a>
+
+<a href="/add_notice" class="menu-link">
+
+<i class="bi bi-megaphone-fill"></i>
+
+Manage Notices
+
+</a>
+
+<a href="/view_notices" class="menu-link active">
+
+<i class="bi bi-card-list"></i>
+
+View Notices
+
+</a>
+
+<a href="/add_event" class="menu-link">
+
+<i class="bi bi-calendar-plus-fill"></i>
+
+Add Event
+
+</a>
+
+<a href="/view_events" class="menu-link">
+
+<i class="bi bi-calendar-event-fill"></i>
+
+View Events
+
+</a>
+
+<a href="/view_assignments" class="menu-link">
+
+<i class="bi bi-file-earmark-text-fill"></i>
+
+Assignments
+
+</a>
+
+<a href="/admin_logout" class="btn btn-danger logout-btn">
+
+<i class="bi bi-box-arrow-right"></i>
+
+Logout
+
+</a>
+
+</div>
+
+<!-- ===========================
+        MAIN CONTENT
+=========================== -->
+
+<div class="dashboard-content">
+
+<div class="content-wrapper">
+
+<div class="welcome-box">
+
+<div class="row align-items-center">
+
+<div class="col-lg-8">
+
+<h2>
+
+<i class="bi bi-megaphone-fill"></i>
+
+Notice Management
+
+</h2>
+
+<p>
+
+View, search, edit and manage all published notices from one centralized location.
+
+</p>
+
+</div>
+
+<div class="col-lg-4 text-end">
+
+<i class="bi bi-megaphone-fill"
+
+style="font-size:75px;color:white;"></i>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Notice Count Card -->
+
+<div class="dashboard-card mb-4">
+
+<div class="card-icon">
+
+<i class="bi bi-megaphone-fill"></i>
+
+</div>
+
+<h5>
+
+Total Notices
+
+</h5>
+
+<h2>
+
+{{ notices|length }}
+
+</h2>
+
+</div>
+<!-- Search & Add Notice -->
+
+<div class="dashboard-box mb-4">
+
+<div class="row align-items-center">
+
+<div class="col-lg-8">
+
+<form method="GET" action="/view_notices">
+
+<div class="input-group">
+
+<input
+type="text"
+name="search"
+class="form-control"
+placeholder="Search Notice Title...">
+
+<button
+type="submit"
+class="btn btn-primary">
+
+<i class="bi bi-search"></i>
+
+Search
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+
+<a
+href="/add_notice"
+class="btn btn-success">
+
+<i class="bi bi-plus-circle-fill"></i>
+
+Add Notice
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Notices Table -->
+
+<div class="dashboard-box">
+
+<h4>
+
+<i class="bi bi-table"></i>
+
+Published Notices
+
+</h4>
+
+<div class="table-responsive mt-3">
+
+<table class="table table-hover align-middle">
+
+<thead class="table-primary">
+
+<tr>
+
+<th>ID</th>
+
+<th>Title</th>
+
+<th>Description</th>
+
+<th class="text-center">
+
+Action
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% if notices %}
+
+{% for notice in notices %}
+
+<tr>
+
+<td>
+{{ notice.id }}
+</td>
+
+<td>
+<strong>
+{{ notice.title }}
+</strong>
+</td>
+
+<td>
+{{ notice.description }}
+</td>
+
+<td class="text-center">
+
+<a
+href="/edit_notice/{{ notice.id }}"
+class="btn btn-warning btn-sm me-2">
+
+<i class="bi bi-pencil-square"></i>
+
+Edit
+
+</a>
+
+<a
+href="/delete_notice/{{ notice.id }}"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Are you sure you want to delete this notice?');">
+
+<i class="bi bi-trash-fill"></i>
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% else %}
+
+<tr>
+
+<td colspan="4" class="text-center py-5">
+
+<i class="bi bi-megaphone fs-1 text-muted"></i>
+
+<h5 class="mt-3">
+No Notices Available
+</h5>
+
+<p class="text-muted">
+There are currently no published notices.
+</p>
+
+<a href="/add_notice" class="btn btn-success">
+
+<i class="bi bi-plus-circle-fill"></i>
+
+Add New Notice
+
+</a>
+
+</td>
+
+</tr>
+
+{% endif %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+<footer>
+
+<hr>
+
+<p>
+
+© 2026 CampusConnect ERP |
+Notice Management
+
+</p>
+
+</footer>
+
+</div>
+
+<!-- End content-wrapper -->
+
+</div>
+
+<!-- End dashboard-content -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+const currentPath = window.location.pathname;
+
+document.querySelectorAll(".menu-link").forEach(link => {
+
+if(link.getAttribute("href") == currentPath){
+
+link.classList.add("active");
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
